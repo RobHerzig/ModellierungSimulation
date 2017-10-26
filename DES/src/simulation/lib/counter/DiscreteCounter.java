@@ -27,12 +27,8 @@ public class DiscreteCounter extends Counter {
 	 */
 	@Override
 	public double getMean() {
-		/**
-		 * TODO Problem 2.1.1 - getMean
-		 * Implement this function!
-		 * Hint: See course syllabus 1.4.1 ff.
-		 */
 		double mean = 0.0;
+		mean = getSumPowerOne() / getNumSamples();
 		return mean;
 	}
 	
@@ -41,12 +37,12 @@ public class DiscreteCounter extends Counter {
 	 */
 	@Override
 	public double getVariance() {
-		/**
-		 * TODO Problem 2.1.1 - getVariance
-		 * Implement this function!
-		 * Hint: See course syllabus 1.4.1 ff.
-		 */
+		//Skript 1.4.3 ?!
 		double variance = 0.0;
+		double x1 = getMean();
+		double x2 = getSumPowerTwo() / getNumSamples();
+		double nPart = (double)getNumSamples() / (double)(getNumSamples()-1);
+		variance = nPart * (x2 - Math.pow(x1, 2));
 		return variance;
 	}
 	
@@ -56,10 +52,8 @@ public class DiscreteCounter extends Counter {
 	@Override
 	public void count(double x) {
 		super.count(x);
-		/**
-		 * TODO Problem 2.1.1 - count
-		 * Implement this function!
-		 * Hint: See course syllabus 1.5.1
-		 */
+
+		increaseSumPowerOne(Math.pow(x, 1)); //Could just be x, this is only for better understanding (power one)
+		increaseSumPowerTwo(Math.pow(x, 2));
 	}
 }

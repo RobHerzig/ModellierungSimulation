@@ -26,12 +26,8 @@ public class ContinuousCounter extends Counter {
 	 */
 	@Override
 	public double getMean() {
-		/**
-		 * TODO Problem 2.1.1 - getMean
-		 * Implement this function!
-		 * Hint: See course syllabus 1.5.3.2
-		 */
 		double mean = 0.0;
+		mean = sumPowerOne / (lastSampleTime - firstSampleTime);
 		return mean;
 	}
 	
@@ -40,12 +36,8 @@ public class ContinuousCounter extends Counter {
 	 */
 	@Override
 	public double getVariance() {
-		/**
-		 * TODO Problem 2.1.1 - getVariance
-		 * Implement this function!
-		 * Hint: See course syllabus 1.5.3.2 and 1.4.1 ff.
-		 */
 		double variance = 0.0;
+		variance = sumPowerTwo / (lastSampleTime - firstSampleTime);
 		return variance;
 	}
 
@@ -55,13 +47,24 @@ public class ContinuousCounter extends Counter {
 	@Override
 	public void count(double x) {
 		super.count(x);
-		/**
-		 * TODO Problem 2.1.1 - count
-		 * Implement this function!
-		 * Update the counter's internal data for the calculation of empirical moments
-		 * Also update lastSampleSize and lastSampleTime
-		 * Hint: See course syllabus 1.5.3.2
-		 */
+		if(getNumSamples() > 1) {
+			//Multiple samples available
+			long timeDifference = sim.getSimTime() - lastSampleTime;
+			//k=1
+			double sigmaK1 = lastSampleSize * timeDifference;
+			increaseSumPowerOne(sigmaK1);
+			//k=2
+			double sigmaK2 = Math.pow(lastSampleSize, 2) * timeDifference;
+			increaseSumPowerTwo(sigmaK2);
+			//refresh values
+			lastSampleTime = sim.getSimTime();
+			lastSampleSize = x;
+		} else {
+			//Only one sample
+			lastSampleTime = sim.getSimTime();
+			firstSampleTime = sim.getSimTime();
+			lastSampleSize = x;
+		}
 	}
 
 	/**
