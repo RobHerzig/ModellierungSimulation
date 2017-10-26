@@ -31,6 +31,7 @@ public class SimulationStudy {
 		 * create simulation object
 		 */
 		Simulator sim = new Simulator();
+		
 		/*
 		 * run simulation
 		 */
