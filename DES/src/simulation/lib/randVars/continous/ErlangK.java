@@ -15,6 +15,7 @@ public class ErlangK extends RandVar {
 	public ErlangK(RNG rng) {
 		super(rng);
 		// TODO Auto-generated constructor stub
+		// we have to di this yes we do
 	}
 
 	@Override
