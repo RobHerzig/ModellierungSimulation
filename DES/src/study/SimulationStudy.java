@@ -88,30 +88,21 @@ public class SimulationStudy {
 	 * Minimum queue size.
 	 */
 	public long minQS;
-
-	/*
-	 * TODO 2.2 possibly more needed
-	 *  Problem 2.2 - naming your statistic objects
-	 * Here you have to set some names (as Sting objects) for all your statistic objects
-	 * They are later used to retrieve them from the dictionary
-	 * 
-	 * Possibly more needed later?
-	 */
 	//discrete counter which measures customer waiting time:
-	public String dcWaitingTime = "discreteCounterWaitingTime";
-	public String dcServiceTime = "discreteServiceWaitingTime";
+	public String dcWaitingTime = "DiscreteCounterWaitingTime";
+	public String dcServiceTime = "DiscreteServiceWaitingTime";
 	
 	//same for histogram
-	public String hWaitingTime = "histogramWaitingTime";
-	public String hServiceTime = "histogramServiceTime";
+	public String hWaitingTime = "DiscreteHistogramWaitingTime";
+	public String hServiceTime = "DiscreteHistogramServiceTime";
 	
 	//Continuous Counters
-	public String conQueueOcc = "continuousCounterQueueOccupancy";
-	public String conUtil = "continuousCounterServerUtilisation";
+	public String conQueueOcc = "DontinuousCounterQueueOccupancy";
+	public String conUtil = "DontinuousCounterServerUtilisation";
 	
 	//same for histogram
-	public String conQueueHist = "continuousHistogramQueueOccupancy";
-	public String conUtilHist = "continuousHistogramServerUtilisation";
+	public String conQueueHist = "DontinuousHistogramQueueOccupancy";
+	public String conUtilHist = "DontinuousHistogramServerUtilisation";
 	
 	
 
@@ -147,11 +138,6 @@ public class SimulationStudy {
 
 		statisticObjects = new HashMap<>();
 
-        /*
-          TODO Problem 2.2 - add statistic objects (counters) to the HashMap
-          Here you have to create your counters and add them to the statisticObjects HashMap
-          Use the name which you specified above as the key
-         */
         // Example: statisticObjects.put(dcWaitingTime, new DiscreteCounter("waiting time/customer"));
 		
 		//discrete counters

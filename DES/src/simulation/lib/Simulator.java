@@ -225,10 +225,9 @@ public class Simulator implements IEventObserver{
 	 * @see IEventObserver#updateQueueOccupancyHandler(Object sender)
 	 */
 	public void updateQueueOccupancyHandler(Object sender) {
-        /*
-         * TODO Problem 2.2.3 - update queue occupancy here
-         * Count the queue size with your respective statistic objects
-         */
+        //increment continuous queue occupancy variables with current queue size
+		sims.statisticObjects.get(sims.conQueueOcc).count(state.queueSize);
+		sims.statisticObjects.get(sims.conQueueHist).count(state.queueSize);
 	}
 
 	/**
