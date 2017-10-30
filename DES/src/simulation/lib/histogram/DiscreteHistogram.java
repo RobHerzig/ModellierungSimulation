@@ -22,12 +22,6 @@ public class DiscreteHistogram extends Histogram {
 	 */
 	@Override
 	public void count(double x) {
-		/**
-		 * TODO Problem 2.1.2 - count
-		 * Implement this function!
-		 * Also update numSamples
-		 * Hint: See course syllabus 1.5.2
-		 */
 		if (x >= getLowerBound() && x < getUpperBound()) {
 			incrementBin(getBinNumber(x), 1); //specified bin gets incremented by 1 (!NOT X!)->one more element in this bin
 			numSamples++;

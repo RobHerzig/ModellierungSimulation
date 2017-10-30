@@ -171,15 +171,16 @@ public class Simulator implements IEventObserver{
 	private void updateStatsCAE(){
         updateQueueSize();
 
-        /*
-         * TODO Problem 2.2.3 - customer arrival event: update server utilization here
-         * Update the server utilization in your corresponding counter and histogram
-         * Therefore, check if the server is busy (state.serverBusy flag)
-         * You can retrieve your statistic objects from the SimulationStudy by using the name Strings
-         * e.g. IStatisticObject statObj = this.sims.statisticObjects.get(this.sims.dcWaitingTime)
-         */
-
+        //same as SCE, but continuous times instead
+        if (state.serverBusy) { //increment by 1 if server is busy, if not, still call count function for rest of functionalities with value 0
+        	sims.statisticObjects.get(sims.conUtil).count(1);
+        	sims.statisticObjects.get(sims.conUtilHist).count(1);
+        } else {
+        	sims.statisticObjects.get(sims.conUtil).count(0);
+        	sims.statisticObjects.get(sims.conUtilHist).count(0);
+        }
 	}
+	
 
 	/**
 	 * Update statistics, fired from service completion event
@@ -191,20 +192,25 @@ public class Simulator implements IEventObserver{
 
             // update customer service end time
             currentCustomer.serviceEndTime = getSimTime();
-
-            /*
-             * TODO Problem 2.2.2 - update waiting and service time measurement objects here
-             * Use your respective counter and histogram to count the service time of the currentCustomer (getTimeInService())
-             * and its waiting time (getTimeInQueue())
-             */
+            
+            //discrete times for the current customer
+            sims.statisticObjects.get(sims.dcServiceTime).count(currentCustomer.serviceEndTime - currentCustomer.serviceStartTime);
+            sims.statisticObjects.get(sims.dcWaitingTime).count(currentCustomer.serviceStartTime - currentCustomer.arrivalTime);
+            //histogram times for the current customer
+            sims.statisticObjects.get(sims.hServiceTime).count(currentCustomer.serviceEndTime - currentCustomer.serviceStartTime);
+            sims.statisticObjects.get(sims.hWaitingTime).count(currentCustomer.serviceStartTime - currentCustomer.arrivalTime);
 
         }
 
-        /*
-         * TODO Problem 2.2.3 - service completion event: update server utilization here
-         * Update the server utilization in your corresponding counter and histogram
-         * Therefore, check if the server is busy (state.serverBusy flag)
-         */
+        //increment by 1 if server is busy, if not, still call count function for rest of functionalities with value 0
+        //Use discrete times here
+        if (state.serverBusy) { //increment by 1 if server is busy, if not, still call count function for rest of functionalities with value 0
+        	sims.statisticObjects.get(sims.dcServiceTime).count(1);
+        	sims.statisticObjects.get(sims.hServiceTime).count(1);
+        } else {
+        	sims.statisticObjects.get(sims.dcServiceTime).count(0);
+        	sims.statisticObjects.get(sims.hServiceTime).count(0);
+        }
 	}
 
     /**

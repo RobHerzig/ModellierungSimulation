@@ -6,6 +6,9 @@ import java.util.Date;
 import java.util.HashMap;
 
 import simulation.lib.Simulator;
+import simulation.lib.counter.DiscreteCounter;
+import simulation.lib.histogram.ContinuousHistogram;
+import simulation.lib.histogram.DiscreteHistogram;
 import simulation.lib.statistic.IStatisticObject;
 
 /**
@@ -87,12 +90,30 @@ public class SimulationStudy {
 	public long minQS;
 
 	/*
-	 * TODO Problem 2.2 - naming your statistic objects
+	 * TODO 2.2 possibly more needed
+	 *  Problem 2.2 - naming your statistic objects
 	 * Here you have to set some names (as Sting objects) for all your statistic objects
 	 * They are later used to retrieve them from the dictionary
+	 * 
+	 * Possibly more needed later?
 	 */
-	// Example for discrete counter which measures customer waiting time:
-	// public String dcWaitingTime = "discreteCounterWaitingTime";
+	//discrete counter which measures customer waiting time:
+	public String dcWaitingTime = "discreteCounterWaitingTime";
+	public String dcServiceTime = "discreteServiceWaitingTime";
+	
+	//same for histogram
+	public String hWaitingTime = "histogramWaitingTime";
+	public String hServiceTime = "histogramServiceTime";
+	
+	//Continuous Counters
+	public String conQueueOcc = "continuousCounterQueueOccupancy";
+	public String conUtil = "continuousCounterServerUtilisation";
+	
+	//same for histogram
+	public String conQueueHist = "continuousHistogramQueueOccupancy";
+	public String conUtilHist = "continuousHistogramServerUtilisation";
+	
+	
 
 	private Simulator simulator;
 
@@ -132,6 +153,25 @@ public class SimulationStudy {
           Use the name which you specified above as the key
          */
         // Example: statisticObjects.put(dcWaitingTime, new DiscreteCounter("waiting time/customer"));
+		
+		//discrete counters
+		statisticObjects.put(dcServiceTime, new DiscreteCounter("Service Time for Customer"));
+		statisticObjects.put(dcWaitingTime, new DiscreteCounter("Waiting Time for Customer"));
+		//discrete histograms, possibly tweak parameters
+		//11k from output max value
+		statisticObjects.put(hServiceTime, new DiscreteHistogram("Service Time For Customer", 50, 0d, 11000d));
+		//output says maximum is 908k?
+		statisticObjects.put(hWaitingTime, new DiscreteHistogram("Waiting Time for Customer", 50, 0d, 10000d));
+		
+		//2.2.3 - continuous counters
+		//Discrete Counters
+		statisticObjects.put(conQueueOcc, new DiscreteCounter("Queue Occupancy"));
+		statisticObjects.put(conUtil, new DiscreteCounter("Server Utilisation"));
+		
+		//Continuous Histograms
+		statisticObjects.put(conQueueHist, new ContinuousHistogram("Queue Occupancy", 50, 0, 1000, simulator));
+		statisticObjects.put(conUtilHist, new ContinuousHistogram("Server Utilisation", 50, 0, 1000, simulator));
+		
 	}
 
 
