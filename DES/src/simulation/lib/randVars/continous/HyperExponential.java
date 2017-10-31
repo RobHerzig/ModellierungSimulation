@@ -22,6 +22,8 @@ public class HyperExponential extends RandVar {
 	
 	public HyperExponential(RNG rng) {
 		super(rng);
+		mean = 1d;
+		cVar = 1d;
 	}
 	
 	public HyperExponential(RNG rng, double _cVar, double _mean) {
@@ -77,7 +79,7 @@ public class HyperExponential extends RandVar {
 		variance = Math.pow(stdDeviation, 2);
 		cVar = stdDeviation/mean;
 		if (cVar != 1d) {
-			throw new IllegalArgumentException("UNACCEPTABLE MEAN AND STD-DEVIATION FOR HYPEREXP.");
+			throw new IllegalArgumentException("UNACCEPTABLE MEAN AND STD-DEVIATION FOR HYPEREXP. : CVAR = " + cVar);
 		}
 		setLambdas();
 	}
