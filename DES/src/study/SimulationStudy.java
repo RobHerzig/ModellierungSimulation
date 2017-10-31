@@ -4,8 +4,11 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 import simulation.lib.Simulator;
+import simulation.lib.counter.Counter;
 import simulation.lib.counter.DiscreteCounter;
 import simulation.lib.histogram.ContinuousHistogram;
 import simulation.lib.histogram.DiscreteHistogram;
@@ -104,8 +107,6 @@ public class SimulationStudy {
 	public String conQueueHist = "DontinuousHistogramQueueOccupancy";
 	public String conUtilHist = "DontinuousHistogramServerUtilisation";
 	
-	
-
 	private Simulator simulator;
 
 	/**
@@ -158,8 +159,18 @@ public class SimulationStudy {
 		statisticObjects.put(conQueueHist, new ContinuousHistogram("Queue Occupancy", 50, 0, 1000, simulator));
 		statisticObjects.put(conUtilHist, new ContinuousHistogram("Server Utilisation", 50, 0, 1000, simulator));
 		
+		//Debugging stuff
+		Iterator it = statisticObjects.entrySet().iterator();
+	    while (it.hasNext()) {
+	    	try{
+	    		Map.Entry pair = (Map.Entry)it.next();
+		        Counter counter = (Counter) pair.getValue();
+		        counter.reset();
+	    	} catch(Exception e) {
+	    		//catch exception (maybe)
+	    	}  
+	    }
 	}
-
 
     /**
      * Report results. Print to console if isDebugReport = true. Print to csv
