@@ -26,7 +26,7 @@ public class SimulationStudy {
 	 * They get converted to simulation time units in setSimulationParameters.
 	 */
 	protected long cInterArrivalTime = 10;
-	protected long cServiceTime = 11;
+	protected long cServiceTime = 9;
 	protected long cSimulationTime = 10000;
 
 	/**
@@ -100,12 +100,12 @@ public class SimulationStudy {
 	public String hServiceTime = "DiscreteHistogramServiceTime";
 	
 	//Continuous Counters
-	public String conQueueOcc = "DontinuousCounterQueueOccupancy";
-	public String conUtil = "DontinuousCounterServerUtilisation";
+	public String conQueueOcc = "ContinuousCounterQueueOccupancy";
+	public String conUtil = "ContinuousCounterServerUtilisation";
 	
 	//same for histogram
-	public String conQueueHist = "DontinuousHistogramQueueOccupancy";
-	public String conUtilHist = "DontinuousHistogramServerUtilisation";
+	public String conQueueHist = "ContinuousHistogramQueueOccupancy";
+	public String conUtilHist = "ContinuousHistogramServerUtilisation";
 	
 	private Simulator simulator;
 
