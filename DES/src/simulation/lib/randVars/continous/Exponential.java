@@ -14,58 +14,66 @@ import simulation.lib.rng.RNG;
  * Expnential distributed random variable.
  */
 public class Exponential extends RandVar {
+	double mean = 0d;
+	double stdDeviation = 0d;
+	double variance = 0d;
 
 	public Exponential(RNG rng) {
 		super(rng);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public double getRV() {
-		// TODO Auto-generated method stub
-		return 0;
+		double result;
+		
+		//E[X] = 1/lambda, X = -ln(U)/lambda
+		//-> lambda = 1/E[X] -> X = -ln(U) * E[X]
+		result = - Math.log(rng.rnd()) * mean;
+		
+		return result;
 	}
 
 	@Override
 	public double getMean() {
-		// TODO Auto-generated method stub
-		return 0;
+		return mean;
 	}
 
 	@Override
 	public double getVariance() {
-		// TODO Auto-generated method stub
-		return 0;
+		return variance;
 	}
 
 	@Override
 	public void setMean(double m) {
-		// TODO Auto-generated method stub
-
+		mean = m;
 	}
 
 	@Override
 	public void setStdDeviation(double s) {
-		// TODO Auto-generated method stub
-
+		stdDeviation = s;
+		variance = Math.pow(stdDeviation, 2);
 	}
 
 	@Override
 	public void setMeanAndStdDeviation(double m, double s) {
-		// TODO Auto-generated method stub
-
+		mean = m;
+		stdDeviation = s;
+		variance = Math.pow(stdDeviation, 2);
 	}
 
 	@Override
 	public String getType() {
-		// TODO Auto-generated method stub
-		return null;
+		String type = "Exponential";
+		return type;
 	}
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
+		//Assuming the string should contain all relevant information
+		String info = "TYPE: " + getType() + ":\n";
+		info += "Mean = " + mean + " StdDev = " + stdDeviation + 
+				" Variance = " + variance;
+		return info;
 	}
 	
 }

@@ -11,58 +11,67 @@ import simulation.lib.rng.RNG;
  * Uniform distributed random variable.
  */
 public class Uniform extends RandVar {
-
+	double mean = 0d;
+	double stdDeviation = 0d;
+	double variance = 0d;
+	
 	public Uniform(RNG rng) {
 		super(rng);
-		// TODO Auto-generated constructor stub
+		// nothing else necessary
 	}
 
 	@Override
 	public double getRV() {
-		// TODO Auto-generated method stub
-		return 0;
+		double result = 0d;
+		//Variance=(a+b)^2/12
+		double b = (Math.sqrt(12*variance) + 2d * mean) / 2d;
+		//E(x) = (a+b)/2
+		double a = 2d * mean - b;
+		result = a + (b-a) * rng.rnd(); //3.2.1 'Erzeugung durch Inversion'
+		return result;
 	}
 
 	@Override
 	public double getMean() {
-		// TODO Auto-generated method stub
-		return 0;
+		return mean;
 	}
 
 	@Override
 	public double getVariance() {
-		// TODO Auto-generated method stub
-		return 0;
+		return variance;
 	}
 
 	@Override
 	public void setMean(double m) {
-		// TODO Auto-generated method stub
-
+		mean = m;
 	}
 
 	@Override
 	public void setStdDeviation(double s) {
-		// TODO Auto-generated method stub
-
+		stdDeviation = s;
+		variance = Math.pow(s, 2);
 	}
 
 	@Override
 	public void setMeanAndStdDeviation(double m, double s) {
-		// TODO Auto-generated method stub
-
+		mean = m;
+		stdDeviation = s;
+		variance = Math.pow(s, 2);
 	}
 
 	@Override
 	public String getType() {
-		// TODO Auto-generated method stub
-		return null;
+		String type = "Uniform";
+		return type;
 	}
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
+		//Assuming the string should contain all relevant information
+		String info = "TYPE: " + getType() + ":\n";
+		info += "Mean = " + mean + " StdDev = " + stdDeviation + 
+				" Variance = " + variance;
+		return info;
 	}
 	
 }
