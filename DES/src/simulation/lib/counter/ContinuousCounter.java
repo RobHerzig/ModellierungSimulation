@@ -20,7 +20,6 @@ public class ContinuousCounter extends Counter {
 		super(variable, "counter type: continuous-time counter");
 		this.sim = sim;
 	}
-	
 	/**
 	 * @see Counter#getMean()
 	 */

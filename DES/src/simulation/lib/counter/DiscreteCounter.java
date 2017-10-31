@@ -43,10 +43,10 @@ public class DiscreteCounter extends Counter {
 		double x2 = getSumPowerTwo() / getNumSamples();
 		double nPart = (double)getNumSamples() / (double)(getNumSamples()-1);
 		
-		System.out.println("x1:"+x1+" x2:" + x2);
+		//System.out.println("x1:"+x1+" x2:" + x2);
 		
 		variance = nPart * (x2 - Math.pow(x1, 2));
-		System.out.println("variance discrete: " + variance);
+		//System.out.println("variance discrete: " + variance);
 		return variance;
 	}
 	
